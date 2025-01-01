@@ -15,8 +15,8 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             {links.map((link) => (
                 <a href="" className="relative inline-block group" key={link}>
-                    <span className=" font-semibold lg:text-lg">{link}</span>
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                    <span className=" font-semibold lg:text-xl text-lg">{link}</span>
+                    <span className="absolute left-0 bottom-[-3px] w-0 h-[3px] bg-primary group-hover:w-full transition-all duration-300 ease-in-out"></span>
                 </a>
                 ))}
           </div>
@@ -27,8 +27,7 @@ export default function Navbar() {
               aria-expanded={isOpen ? "true" : "false"}
               initial={{ rotate: 0 }}
               animate={{ rotate: isOpen ? 90 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
+              transition={{ duration: 0.3 }}>
               {isOpen ? 'Close' : 'Open'}
             </motion.button>
           </div>
@@ -40,16 +39,15 @@ export default function Navbar() {
         animate={isOpen ? { height: "auto" } : { height: 0 }}
         transition={{ duration: 0.2 }}
         className="md:hidden overflow-hidden">
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="px-2 pb-3 space-y-1 sm:px-3 h-screen pt-32">
           {links.map((item) => (
             <motion.a
               key={item}
               href="#"
-              className="block px-3 py-2  text-base font-medium  hover:border-secundary border-4 border-transparent "
+              className="flex justify-center px-3 py-2  text-base font-medium  hover:border-secundary border-4 border-transparent "
               initial={{ y: -10 }}
               animate={isOpen ? { y: 0 } : { y: -10 }}
-              transition={{ duration: 0.1 }}
-            >
+              transition={{ duration: 0.1 }}>
               {item}
             </motion.a>
           ))}
