@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className="font-sans"
+        className="font-sans bg-black"
       >
         <Navbar />
         {children}
