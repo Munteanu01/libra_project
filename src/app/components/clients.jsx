@@ -62,7 +62,7 @@ export default function ResponsiveCarousel() {
   }
 
   return (
-    <div className="w-full mt-40 bg-black text-white">
+    <div className="max-w-screen mt-40 bg-black text-white lg:mx-14">
       {/* Mobile Carousel */}
       <div className="relative overflow-hidden lg:hidden flex justify-center h-32">
         <motion.button
@@ -91,7 +91,7 @@ export default function ResponsiveCarousel() {
       </div>
 
       {/* Desktop Grid */}
-      <div className="hidden lg:grid grid-cols-6 gap-16 max-w-6xl  mx-10">
+      <div className="hidden lg:grid grid-cols-6 gap-16 max-w-6xl mx-auto">
         {items.map((item) => (
           <div key={item.id} className="">
             <img src={item.src} alt={item.alt} />

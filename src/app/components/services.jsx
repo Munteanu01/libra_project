@@ -1,11 +1,12 @@
 'use client'
-import { FlameIcon as Fire, Bell, ShieldAlert, Cctv } from 'lucide-react'
+import { FlameIcon as Fire, Siren, ShieldAlert, Cctv } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
 
 const services = [
   { icon: Cctv, title: "Montare Camere Video", description: "exemplu" },
   { icon: Fire, title: "Detectie Incendiu", description: "exemplu" },
-  { icon: Bell, title: "Sisteme Alarma", description: "exemplu" },
+  { icon: Siren, title: "Sisteme Alarma", description: "exemplu" },
   { icon: ShieldAlert, title: "Exemplu", description: "exemplu" },
 ]
 
