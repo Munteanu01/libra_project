@@ -1,99 +1,65 @@
 'use client'
-import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+import { useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const slides = [
   { image: '/pexels-jakubzerdzicki-20614571.jpg', alt: 'Security System 1', text: 'Sisteme complete de detectie incendiu' },
   { image: 'pexels-onemorecoffee-179993.jpg', alt: 'Security System 2', text: 'Sisteme de Supraveghere' },
   { image: '', alt: 'Security System 3', text: 'Example' },
-];
+]
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [typewriterText, setTypewriterText] = useState('');
-  
-  const touchStart = useRef(0);
-  const touchEnd = useRef(0);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Store the timer ID to reset it
-  const timerRef = useRef(null);
+  const touchStart = useRef(0)
+  const touchEnd = useRef(0)
+  const timerRef = useRef(null)
 
-  // Handle the swipe events
   const handleTouchStart = (e) => {
-    touchStart.current = e.touches[0].clientX;
-  };
+    touchStart.current = e.touches[0].clientX
+  }
 
   const handleTouchEnd = (e) => {
-    touchEnd.current = e.changedTouches[0].clientX;
+    touchEnd.current = e.changedTouches[0].clientX
+    if (touchStart.current - touchEnd.current > 50) goToNextSlide()
+    if (touchEnd.current - touchStart.current > 50) goToPrevSlide()
+  }
 
-    if (touchStart.current - touchEnd.current > 50) {
-      goToNextSlide();
-    }
-
-    if (touchEnd.current - touchStart.current > 50) {
-      goToPrevSlide();
-    }
-  };
-
-  // Start the timer for auto-slide
   const startAutoSlide = () => {
-    // Clear any existing timer
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-
-    // Set a new timer
+    if (timerRef.current) clearInterval(timerRef.current)
     timerRef.current = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 5000);
-  };
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length)
+    }, 5000)
+  }
 
   useEffect(() => {
-    startAutoSlide(); // Start the auto slide on initial render
-
+    startAutoSlide()
     return () => {
-      // Clear the timer when the component is unmounted
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-  let i = 0;
-  let currentText = ''; // Temporary variable to build the text
-  const typeTimer = setInterval(() => {
-    if (i < slides[currentSlide].text.length) {
-      currentText += slides[currentSlide].text[i];
-      setTypewriterText(currentText); // Update the state with the built text
-      i++;
-    } else {
-      clearInterval(typeTimer); // Stop the timer when typing is complete
+      if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, 40);
+  }, [])
 
-  return () => {
-    clearInterval(typeTimer); // Cleanup the timer
-    setTypewriterText(''); // Reset the text for the next slide
-  };
-}, [currentSlide]);
-
-
-  // Reset the timer when the slide changes manually
   const goToSlide = (index) => {
-    setCurrentSlide(index);
-    startAutoSlide(); // Reset the auto-slide timer when manually switching
-  };
+    setCurrentSlide(index)
+    startAutoSlide()
+  }
 
   const goToPrevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
-    startAutoSlide(); // Reset the auto-slide timer when manually switching
-  };
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length)
+    startAutoSlide()
+  }
 
   const goToNextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    startAutoSlide(); // Reset the auto-slide timer when manually switching
-  };
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length)
+    startAutoSlide()
+  }
+
+  const textVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+  }
 
   return (
     <section
@@ -112,12 +78,21 @@ export default function Hero() {
       ))}
       <div className="absolute inset-0 bg-black bg-opacity-50" />
       <div className="relative h-full container mx-auto px-4 flex flex-col justify-center items-center text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">Viziune<span className='text-primary'>.</span> Siguranță<span className='text-primary'>.</span> Rezultate<span className='text-secundary'>.</span></h1>
-        <h2 className="text-2xl md:text-4xl font-semibold mb-8">Asigură-ți spațiul cu tehnologie de ultimă generație</h2>
-    
-
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Asigură-ți spațiul cu tehnologie de ultimă generație<span className='text-secundary'>.</span>
+        </h1>
         <div className="mt-8 h-8">
-          <p className="text-xl font-semibold">{typewriterText}</p>
+          <motion.p
+            key={currentSlide} // Re-animate on slide change
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={textVariants}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-xl font-semibold"
+          >
+            {slides[currentSlide].text}
+          </motion.p>
         </div>
       </div>
 
@@ -155,5 +130,5 @@ export default function Hero() {
         </button>
       </div>
     </section>
-  );
+  )
 }

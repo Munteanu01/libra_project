@@ -36,14 +36,14 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div>
             <Link href={'/'} onClick={handleLinkClick}>
-              <img className="max-w-24 top-4 left-1 md:top-10 md:max-w-32 absolute z-50" src="logo.png" alt="Logo" />
+              <img className="max-w-24 top-4 left-1 lg:left-10 md:top-10 md:max-w-32 absolute z-50" src="logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
             {links.slice(0, -1).map(({ text, href }) => (
               <NavLink key={text} link={text} href={href} onClick={handleLinkClick} />
             ))}
-            <Link href={links[3].href} className="border-[3px] border-primary pb-1 px-2 rounded-md font-semibold lg:text-xl text-lg hover:bg-primary hover:text-white transition-all duration-200 ease-in-out" onClick={handleLinkClick}>
+            <Link href={links[3].href} className="border-[3px] border-secundary pb-1 px-2 rounded-md font-semibold lg:text-xl text-lg hover:bg-secundary hover:text-white transition-all duration-200 ease-in-out" onClick={handleLinkClick}>
               Contact
             </Link>
           </div>
@@ -53,16 +53,33 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Animated Menu Container */}
       <motion.div
-        initial={{ height: 0 }}
-        animate={isOpen ? { height: "100vh" } : { height: 0 }}
-        transition={{ duration: 0.3 }}
-        className="absolute top-0 left-0 right-0 overflow-hidden bg-black z-40 md:hidden">
+        initial={{ height: 0, opacity: 0 }}
+        animate={{
+          height: isOpen ? "100vh" : 0,
+          opacity: isOpen ? 1 : 0
+        }}
+        transition={{
+          duration: 0.4,
+          ease: "easeInOut"
+        }}
+        className="absolute top-0 left-0 right-0 overflow-hidden bg-black z-40 md:hidden"
+      >
         <div className="px-2 space-y-4 sm:px-3 h-screen w-screen flex flex-col items-center justify-center pb-32">
           {links.map(({ text, href }) => (
-            <motion.div key={text} initial={{ y: -10 }} animate={isOpen ? { y: 0 } : { y: -10 }} transition={{ duration: 0.1 }
-            } className='pt-7'>
-              <NavLink className="" link={text} href={href} onClick={handleLinkClick} />
+            <motion.div
+              key={text}
+              initial={{ y: -20, opacity: 0 }}
+              animate={isOpen ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.1,
+                ease: "easeInOut"
+              }}
+              className="pt-7"
+            >
+              <NavLink link={text} href={href} onClick={handleLinkClick} />
             </motion.div>
           ))}
         </div>

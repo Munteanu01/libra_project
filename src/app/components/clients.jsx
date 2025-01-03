@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const items = [
-  { id: 1, src: '/fan.jpeg', alt:'Fan Courier'},
+  { id: 1, src: '/fan.png', alt:'Fan Courier'},
   { id: 2, alt: 'Client2'},
   { id: 3, alt: 'Client3'},
   { id: 4, alt: 'Client4' },
@@ -62,7 +62,8 @@ export default function ResponsiveCarousel() {
   }
 
   return (
-    <div className="max-w-screen mt-40 bg-black text-white lg:mx-14">
+    <div className="max-w-screen mt-40  text-white lg:mx-2">
+      <h1 className='font-semibold text-2xl md:text-4xl text-center'>Clientii Nostri</h1>
       {/* Mobile Carousel */}
       <div className="relative overflow-hidden lg:hidden flex justify-center h-32">
         <motion.button
@@ -72,11 +73,11 @@ export default function ResponsiveCarousel() {
           whileTap={{ scale: 0.95 }}>
           <ChevronLeft className="w-6 h-6 text-white" />
         </motion.button>
-        <div className="flex justify-between w-full mx-5 pt-2">
+        <div className="flex justify-between w-full mx-5">
           {getVisibleItems().map((item) => (
             <div key={item.id} className="p-2">
               
-                <img className='flex-mx-auto' src={item.src} alt={item.alt} />
+                <img className='flex-mx-auto max-w-36' src={item.src} alt={item.alt} />
              
             </div>
           ))}
@@ -91,7 +92,7 @@ export default function ResponsiveCarousel() {
       </div>
 
       {/* Desktop Grid */}
-      <div className="hidden lg:grid grid-cols-6 gap-16 max-w-6xl mx-auto">
+      <div className="hidden lg:grid grid-cols-6 xl:max-w-[1500px]  mx-auto py-6">
         {items.map((item) => (
           <div key={item.id} className="">
             <img src={item.src} alt={item.alt} />
