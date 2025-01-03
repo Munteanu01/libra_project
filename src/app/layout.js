@@ -1,6 +1,6 @@
 
 import "./globals.css";
-import Navbar from './components/navbar'
+import Navbar from './components/navbar/navbar'
 import Clients from './components/clients'
 import Footer from './components/footer'
 
