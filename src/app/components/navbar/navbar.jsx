@@ -1,14 +1,16 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import NavLink from './navLinks'; // Import NavLink component
-import MobileButton from './mobileButton'; // Import MobileButton component
+import Button from './button'; // Import MobileButton component
 import Link from 'next/link';
+import MobileMenu from './mobileMenu'; // Import the new MobileMenu component
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // State to track mounting
+
   const links = [
-    { text: 'Despre noi', href: '/despre-noi' },
+    { text: 'Despre noi', href: '/despre' },
     { text: 'Portofoliu', href: '/portofoliu' },
     { text: 'Servicii', href: '/servicii' },
     { text: 'Contact', href: '/contact' }
@@ -17,6 +19,8 @@ export default function Navbar() {
   const handleLinkClick = () => setIsOpen(false); // Close the menu when a link is clicked
 
   useEffect(() => {
+    setIsMounted(true); // Mark as mounted after the component mounts on the client
+
     // Disable scrolling when the menu is open
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -24,11 +28,14 @@ export default function Navbar() {
       document.body.style.overflow = 'auto';
     }
 
-    // Cleanup the effect on component unmount or when the menu is closed
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'auto'; // Cleanup when unmounting
     };
   }, [isOpen]);
+
+  if (!isMounted) {
+    return null; // Prevent SSR mismatch
+  }
 
   return (
     <nav className="bg-transparent text-white absolute top-0 left-0 right-0 z-50 sm:pt-5">
@@ -48,42 +55,13 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex md:hidden">
-            <MobileButton isOpen={isOpen} setIsOpen={setIsOpen} />
+            <Button isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
         </div>
       </div>
 
-      {/* Animated Menu Container */}
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{
-          height: isOpen ? "100vh" : 0,
-          opacity: isOpen ? 1 : 0
-        }}
-        transition={{
-          duration: 0.4,
-          ease: "easeInOut"
-        }}
-        className="absolute top-0 left-0 right-0 overflow-hidden bg-black z-40 md:hidden"
-      >
-        <div className="px-2 space-y-4 sm:px-3 h-screen w-screen flex flex-col items-center justify-center pb-32">
-          {links.map(({ text, href }) => (
-            <motion.div
-              key={text}
-              initial={{ y: -20, opacity: 0 }}
-              animate={isOpen ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
-              transition={{
-                duration: 0.3,
-                delay: 0.1,
-                ease: "easeInOut"
-              }}
-              className="pt-7"
-            >
-              <NavLink link={text} href={href} onClick={handleLinkClick} />
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+      {/* Mobile Menu Component */}
+      <MobileMenu isOpen={isOpen} links={links} handleLinkClick={handleLinkClick} />
     </nav>
   );
 }

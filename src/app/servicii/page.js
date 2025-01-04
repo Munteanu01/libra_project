@@ -1,9 +1,11 @@
 'use client'
 
-export default function Services() {
+export default function Servicii() {
     return (
-        <h1 className="mt-64 flex text-white">Services
+        <div>
+        <h1 className="mt-64 flex text-white">Servicii
         
         </h1>
+        </div>
     )
 }

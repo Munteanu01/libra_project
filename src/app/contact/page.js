@@ -9,7 +9,8 @@ export default function Contact() {
     <section className=" mt-32 lg:pb-20  text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
+          <h1 className="text-3xl font-bold text-center mb-8">Telefon: +40 210 410 210</h1>
+          <h1 className="text-3xl font-bold text-center mb-8">Email</h1>
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input type="text" placeholder="Your Name" className="bg-white text-gray-900" />

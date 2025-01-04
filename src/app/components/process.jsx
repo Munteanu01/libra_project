@@ -21,7 +21,7 @@ const steps = [
 
 export default function OurProcess() {
   return (
-    <section className="py-24 text-white">
+    <section className="py-24 text-white h-svh">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Procesul Nostru</h2>
         <p className="text-center text-xl mb-12 max-w-3xl mx-auto">

@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const slides = [
-  { image: '/pexels-jakubzerdzicki-20614571.jpg', alt: 'Security System 1', text: 'Sisteme complete de detectie incendiu' },
-  { image: 'pexels-onemorecoffee-179993.jpg', alt: 'Security System 2', text: 'Sisteme de Supraveghere' },
-  { image: '', alt: 'Security System 3', text: 'Example' },
+  { image: '/1.png', alt: 'Security System 1', text: 'Sisteme complete de detectie incendiu' },
+  { image: '/2.png', alt: 'Security System 2', text: 'Sisteme de Supraveghere' },
+  { image: '/3.png', alt: 'Security System 3', text: 'Exemplu' },
 ]
 
 export default function Hero() {
