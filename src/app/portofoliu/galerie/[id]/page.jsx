@@ -13,9 +13,9 @@ export default function GalleryPage() {
   if (!projectImages) {
     return (
       <div className="container mx-auto px-4 py-16 text-white">
-        <h1 className="text-4xl font-bold mb-6">Project Not Found</h1>
+        <h1 className="text-4xl font-bold mb-6">Proiectul nu a fost gasit</h1>
         <Link href="/portofoliu">
-          <span className="text-blue-500 hover:underline">&larr; Back to Projects</span>
+          <span className="text-blue-500 hover:underline">&larr; Inapoi la Proiecte</span>
         </Link>
       </div>
     );
@@ -24,7 +24,7 @@ export default function GalleryPage() {
   return (
     <div className="container mx-auto px-4 py-16 mt-64 text-white">
       <Link href="/portofoliu" className="text-blue-500 hover:underline mb-8 inline-block">
-        &larr; Back to Projects
+        &larr; Inapoi la Proiecte
       </Link>
       <h1 className="text-4xl font-bold mb-6">{id.replace("-", " ")}</h1>
       <div className="grid grid-cols-3 gap-4">

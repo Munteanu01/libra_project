@@ -78,7 +78,7 @@ export default function Hero() {
       ))}
       <div className="absolute inset-0 bg-black bg-opacity-50" />
       <div className="relative h-full container mx-auto px-4 flex flex-col justify-center items-center text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mx-4 mx-1">
           Asigură-ți spațiul cu tehnologie de ultimă generație<span className='text-secundary'>.</span>
         </h1>
         <div className="mt-8 h-8">

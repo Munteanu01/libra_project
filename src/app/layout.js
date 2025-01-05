@@ -10,10 +10,10 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className="font-sans bg-primary">
+      <body className="font-sans bg-primary scroll-smooth">
         <Navbar />
         {children}
-        {pathname !== "/contact" && <Clients />}
+        {pathname !== "/contact" && pathname !== "/portofoliu"   && <Clients />}
         <Footer />
         {/* Conditionally render the footer */}
         

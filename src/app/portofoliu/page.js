@@ -1,4 +1,3 @@
-// page.js
 'use client'
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
@@ -48,7 +47,7 @@ const Project = ({ title, aboutText, id }) => {
             href={`/portofoliu/galerie/${id}`}
             className="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg text-lg font-semibold transition duration-300"
           >
-            View Full Gallery
+            Vezi Galerie
           </Link>
         </div>
       </div>
@@ -57,6 +56,24 @@ const Project = ({ title, aboutText, id }) => {
 };
 
 export default function Portfoliu() {
+  useEffect(() => {
+    // Check if there's a hash in the URL after the page has mounted
+    const hash = window.location.hash;
+    if (hash) {
+      // Reduce the delay time to make it quicker
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          // Scroll to the element with the matching id
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start', // Align to the top of the viewport
+          });
+        }
+      }, 100); // Reduced delay to make the scroll faster (100ms)
+    }
+  }, []); // Empty dependency array ensures this only runs once after the page loads
+
   return (
     <div className="container mx-auto px-4 py-16 mt-64 text-white">
       <div className="h-screen text-center">
@@ -64,11 +81,13 @@ export default function Portfoliu() {
           Proiectele Noastre
         </h1>
         <div className="grid grid-flow-col gap-36 justify-center pt-10 font-semibold text-2xl">
+          {/* Links that navigate to sections within the page */}
           <Link href="#fan-stefanesti">FAN COURIER - STEFANESTI</Link>
           <Link href="#eurial">EURIAL</Link>
         </div>
       </div>
 
+      {/* Project Components */}
       <Project
         title="Fan Courier - Stefanesti"
         id="fan-stefanesti"
